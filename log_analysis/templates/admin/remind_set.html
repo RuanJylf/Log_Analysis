@@ -1,0 +1,48 @@
+{#remind_set.html#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>日志分析</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/mains.css">
+    <script type="text/javascript" src="../../static/common/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="../../static/admin/js/jquery.form.min.js"></script>
+    <script src="../../static/admin/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="../../static/admin/js/tinymce_setup.js"></script>
+    <script src="../../static/admin/js/remind_set.js"></script>
+</head>
+
+<body class="inframe_body">
+<div class="breadcrub">站点管理 > 提醒设置</div>
+
+<form class="release_form">
+    <h3>提醒设置</h3>
+    <div class="form-group"><label>报错次数阈值：</label>
+        <input type="text" class="input_txt2" name="error_count" placeholder="(单位: 次数) 相同接口报错次数超过此阈值才会发送提醒">
+    </div>
+    <div class="form-group"><label>报错时间间隔：</label>
+        <input type="text" class="input_txt2" name="error_time" placeholder="(单位: 分钟) 相同接口报错时间间隔在此范围内才会发送提醒">
+    </div>
+    <div class="form-group"><label>提醒时间间隔：</label>
+        <input type="text" class="input_txt2" name="remind_time" placeholder="(单位: 分钟) 相同接口间隔多长时间会再次提醒">
+    </div>
+    <div class="form-group"><label>读取时间间隔：</label>
+        <input type="text" class="input_txt2" name="read_time" placeholder="(单位: 分钟) 每一次读取日志文件多长时间">
+    </div>
+    <div class="form-group"><label>定时时间间隔：</label>
+        <input type="text" class="input_txt2" name="crontab_time" placeholder="(单位: 分钟) 定时任务间隔多长时间执行一次">
+    </div>
+
+    <div class="form-group indent-group line-top">
+        <input type="submit" value="确 定" class="confirm">
+        <input type="button" value="取 消" class="cancel" onclick="cancel()">
+    </div>
+
+    <div class="error_tip2">错误提示</div>
+</form>
+
+</body>
+</html>

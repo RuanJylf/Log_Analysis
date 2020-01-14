@@ -1,0 +1,53 @@
+{#remind_modify.html#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>日志分析</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/mains.css">
+    <script type="text/javascript" src="../../static/common/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="../../static/admin/js/jquery.form.min.js"></script>
+    <script src="../../static/admin/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="../../static/admin/js/tinymce_setup.js"></script>
+    <script src="../../static/admin/js/remind_modify.js"></script>
+</head>
+
+<body class="inframe_body">
+<div class="breadcrub">站点管理 > 站点提醒 > 状态修改</div>
+
+<form class="release_form">
+    <h3>状态修改</h3>
+    <div class="form-group"><label>报错站点：</label>
+        <input type="text" class="input_txt2" name="site_name" value="{{ data.remind.site_name }}" readonly="readonly">
+    </div>
+    <div class="form-group"><label>报错时间：</label>
+        <input type="text" class="input_txt2" name="date_time" value="{{ data.remind.date_time }}" readonly="readonly">
+    </div>
+    <div class="form-group"><label>报错服务器：</label>
+        <input type="text" class="input_txt2" name="server" value="{{ data.remind.server }}" readonly="readonly">
+    </div>
+    <div class="form-group"><label>报错接口：</label>
+        <input type="text" class="input_txt2" name="url" value="{{ data.remind.url }}" readonly="readonly">
+    </div>
+    <div class="form-group"><label>报错信息：</label>
+        <textarea class="input_multxt" name="message" readonly="readonly">{{ data.remind.message }} </textarea>
+    </div>
+    <div class="form-group"><label>处理状态：</label>
+        <input type="text" placeholder="0代表未处理, 1代表已处理" class="input_txt2" name="state"
+               value="{% if data.remind.state %} 已处理 {% else %} 未处理 {% endif %}">
+    </div>
+    <input type="hidden" name="remind_id" value="{{ data.remind.remind_id }}">
+
+    <div class="form-group indent-group line-top">
+        <input type="submit" value="修 改" class="confirm">
+        <input type="button" value="取 消" class="cancel" onclick="cancel()">
+    </div>
+
+    <div class="error_tip2">错误提示</div>
+</form>
+
+</body>
+</html>

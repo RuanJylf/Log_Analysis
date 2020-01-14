@@ -1,0 +1,73 @@
+{#site_remind.html#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>日志分析</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/main.css">
+    <link rel="stylesheet" href="../../static/common/css/jquery.pagination.css">
+    <script type="text/javascript" src="../../static/common/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="../../static/common/js/jquery.pagination.min.js"></script>
+</head>
+
+<body>
+<div class="breadcrub">
+    站点管理 > 站点提醒
+    <form class="news_filter_form">
+        <input type="text" placeholder="报错站点关键词" name="keywords" class="input_txt">
+        <input type="submit" value="搜 索" class="input_sub">
+    </form>
+</div>
+
+<div class="pannel">
+    <table class="common_table">
+        <tr>
+            <th width="10%">报错站点</th>
+            <th width="10%">报错时间</th>
+            <th width="15%">报错服务器</th>
+            <th width="15%">报错接口</th>
+            <th width="35%">报错信息</th>
+            <th width="5%">处理状态</th>
+            <th width="10%">管理操作</th>
+        </tr>
+
+        {% for remind in data.remind_list %}
+            <tr>
+                <td>{{ remind.site_name }}</td>
+                <td>{{ remind.date_time }}</td>
+                <td>{{ remind.server }}</td>
+                <td>{{ remind.url }}</td>
+                <td>{{ remind.message }}</td>
+                <td>{% if remind.state %} 已处理 {% else %} 未处理 {% endif %}</td>
+                <td class="btnbox">
+                    <a href="{{ url_for('admin.remind_modify') }}?remind_id={{ remind.remind_id }}" class="review">修
+                        改</a>
+                    <a href="{{ url_for('admin.remind_delete') }}?remind_id={{ remind.remind_id }}" class="delete">删
+                        除</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="box">
+    <div id="pagination" class="page"></div>
+</div>
+
+<script>
+    $(function () {
+        $("#pagination").pagination({
+            currentPage: {{ data.current_page }},
+            totalPage: {{ data.total_page }},
+            callback: function (current) {
+                window.location = '/site_remind?page=' + current
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

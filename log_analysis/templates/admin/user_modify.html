@@ -1,0 +1,57 @@
+{#user_modify.html#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>日志分析</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/mains.css">
+    <script type="text/javascript" src="../../static/common/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="../../static/admin/js/jquery.form.min.js"></script>
+    <script type="text/javascript" src="../../static/admin/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript" src="../../static/admin/js/tinymce_setup.js"></script>
+    <script src="../../static/admin/js/user_modify.js"></script>
+</head>
+
+<body class="inframe_body">
+<div class="breadcrub">用户管理 > 用户编辑 > 用户修改</div>
+
+<form class="release_form">
+    <h3>用户修改</h3>
+    <div class="form-group"><label>用户名称：</label>
+        <input type="text" class="input_txt2" name="user_name" value="{{ data.user.user_name }}">
+    </div>
+    <div class="form-group"><label>用户密码：</label>
+        <input type="password" class="input_txt2" name="password">
+    </div>
+    <div class="form-group"><label>是否管理：</label>
+        <input type="text" placeholder="0代表否, 1代表是" class="input_txt2" name="is_admin"
+               value="{% if data.user.is_admin %} 1 {% else %} 0 {% endif %}">
+    </div>
+    <div class="form-group"><label>手机号码：</label>
+        <input type="text" class="input_txt2" name="phone" value="{{ data.user.phone }}">
+    </div>
+    <div class="form-group"><label>邮箱地址：</label>
+        <input type="text" class="input_txt2" name="email" value="{{ data.user.email }}">
+    </div>
+    <input type="hidden" name="user_id" value="{{ data.user.user_id }}">
+    <input type="hidden" name="page" value="{{ data.page }}">
+
+    <div class="form-group indent-group line-top">
+        <input type="submit" value="修 改" class="confirm">
+        <input type="button" value="取 消" class="cancel" onclick="cancel()">
+    </div>
+    <div class="error_tip2">错误提示</div>
+</form>
+
+<script>
+    // 点击取消，返回上一页
+    function cancel() {
+        history.go(-1)
+    }
+</script>
+
+</body>
+</html>

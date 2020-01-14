@@ -1,0 +1,103 @@
+{#log_details.html#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>日志分析</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/main.css">
+    <link rel="stylesheet" href="../../static/common/css/jquery.pagination.css">
+    <script type="text/javascript" src="../../static/common/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="../../static/common/js/jquery.pagination.min.js"></script>
+</head>
+
+<body>
+<div class="breadcrub">
+    日志管理 > 日志详情 > {{ data.site_name }}
+    <form class="news_filter_form">
+        <input type="text" placeholder="访问接口关键词" name="keywords" class="input_txt">
+        <input type="submit" value="搜 索" class="input_sub" name="type_log">
+        <input type="hidden" name="log_type" value="{{ data.log_type }}">
+    </form>
+</div>
+
+<div class="pannel">
+
+    <table class="common_table">
+
+        {% if data.log_type == "access" %}
+            <tr>
+                <th width="10%">IP地址</th>
+                <th width="10%">访问时间</th>
+                <th width="5%">访问方法</th>
+                <th width="15%">访问接口</th>
+                <th width="5%">请求协议</th>
+                <th width="5%">状态码</th>
+                <th width="5%">流量(KB)</th>
+                <th width="15%">来源页面</th>
+                <th width="30%">设备信息</th>
+            </tr>
+
+            {% for log in data.log_list %}
+                <tr>
+                    <td>{{ log.ip }}</td>
+                    <td>{{ log.date_time }}</td>
+                    <td>{{ log.method }}</td>
+                    <td>{{ log.url }}</td>
+                    <td>{{ log.protocol }}</td>
+                    <td>{{ log.status }}</td>
+                    <td>{{ log.size }}</td>
+                    <td>{{ log.referrer }}</td>
+                    <td>{{ log.useragent }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <th width="10%">错误时间</th>
+                <th width="5%">错误级别</th>
+                <th width="25%">错误信息</th>
+                <th width="10%">客户端</th>
+                <th width="10%">服务器</th>
+                <th width="5%">请求方法</th>
+                <th width="15%">请求接口</th>
+                <th width="5%">请求协议</th>
+                <th width="15%">来源页面</th>
+            </tr>
+
+            {% for log in data.log_list %}
+                <tr>
+                    <td>{{ log.date_time }}</td>
+                    <td>{{ log.level }}</td>
+                    <td>{{ log.message }}</td>
+                    <td>{{ log.client }}</td>
+                    <td>{{ log.server }}</td>
+                    <td>{{ log.method }}</td>
+                    <td>{{ log.url }}</td>
+                    <td>{{ log.protocol }}</td>
+                    <td>{{ log.referrer }}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+</div>
+
+<div class="box">
+    <div id="pagination" class="page"></div>
+</div>
+
+<script>
+    $(function () {
+        $("#pagination").pagination({
+            currentPage: {{ data.current_page }},
+            totalPage: {{ data.total_page }},
+            callback: function (current) {
+                window.location = '/log_details?page=' + current
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

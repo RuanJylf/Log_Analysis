@@ -1,0 +1,78 @@
+{#site_edit.html#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>日志分析</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/main.css">
+    <link rel="stylesheet" href="../../static/common/css/jquery.pagination.css">
+    <script type="text/javascript" src="../../static/common/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="../../static/common/js/jquery.pagination.min.js"></script>
+</head>
+
+<body>
+<div class="breadcrub">
+    站点管理 > 站点编辑
+    <form class="news_filter_form">
+        <input type="text" placeholder="站点名称关键词" name="keywords" class="input_txt">
+        <input type="submit" value="搜 索" class="input_sub">
+        <input type="button" value="添 加" class="input_sub" onclick="site_add()">
+    </form>
+</div>
+
+<div class="pannel">
+    <table class="common_table">
+        <tr>
+            <th width="10%">站点名称</th>
+            <th width="10%">主机域名</th>
+            <th width="25%">访问日志</th>
+            <th width="25%">错误日志</th>
+            <th width="20%">链接网址</th>
+            <th width="10%">管理操作</th>
+        </tr>
+
+        {% for site in data.site_list %}
+            <tr>
+                <td>{{ site.site_name }}</td>
+                <td>{{ site.host }}</td>
+                <td>
+                    <a href="{{ url_for('admin.log_overview') }}?keywords={{ site.access_log }}">{{ site.access_log }}</a>
+                </td>
+                <td><a href="{{ url_for('admin.log_overview') }}?keywords={{ site.error_log }}">{{ site.error_log }}</a>
+                </td>
+                <td><a href="{{ site.link }}">{{ site.link }}</a></td>
+                <td class="btnbox">
+                    <a href="{{ url_for('admin.site_modify') }}?site_id={{ site.site_id }}" class="review">修 改</a>
+                    <a href="{{ url_for('admin.site_delete') }}?site_id={{ site.site_id }}" class="delete">删 除</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="box">
+    <div id="pagination" class="page"></div>
+</div>
+
+<script>
+    $(function () {
+        $("#pagination").pagination({
+            currentPage: {{ data.current_page }},
+            totalPage: {{ data.total_page }},
+            callback: function (current) {
+                window.location = '/site_edit?page=' + current
+            }
+        });
+    });
+
+    // 点击添加，跳转站点添加页面
+    function site_add() {
+        window.location = '/site_add'
+    }
+</script>
+
+</body>
+</html>

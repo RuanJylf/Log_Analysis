@@ -1,0 +1,49 @@
+{#site_delete.html#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>日志分析</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/mains.css">
+    <script type="text/javascript" src="../../static/common/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="../../static/admin/js/jquery.form.min.js"></script>
+    <script src="../../static/admin/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="../../static/admin/js/tinymce_setup.js"></script>
+    <script src="../../static/admin/js/site_delete.js"></script>
+</head>
+
+<body class="inframe_body">
+<div class="breadcrub">站点管理 > 站点编辑 > 站点删除</div>
+
+<form class="release_form">
+    <h3>站点删除</h3>
+    <div class="form-group"><label>站点名称：</label>
+        <input type="text" class="input_txt2" name="site_name" value="{{ data.site.site_name }}" readonly="readonly">
+    </div>
+    <div class="form-group"><label>主机域名：</label>
+        <input type="text" class="input_txt2" name="host" value="{{ data.site.host }}" readonly="readonly">
+    </div>
+    <div class="form-group"><label>访问日志：</label>
+        <input type="text" class="input_txt2" name="access_log" value="{{ data.site.access_log }}" readonly="readonly">
+    </div>
+    <div class="form-group"><label>错误日志：</label>
+        <input type="text" class="input_txt2" name="error_log" value="{{ data.site.error_log }}" readonly="readonly">
+    </div>
+    <div class="form-group"><label>链接网址：</label>
+        <input type="text" class="input_txt2" name="link" value="{{ data.site.link }}" readonly="readonly">
+    </div>
+
+    <input type="hidden" name="site_id" value="{{ data.site.site_id }}">
+
+    <div class="form-group indent-group line-top">
+        <input type="submit" value="删 除" class="confirm">
+        <input type="button" value="取 消" class="cancel" onclick="cancel()">
+    </div>
+    <div class="error_tip2">错误提示</div>
+</form>
+
+</body>
+</html>

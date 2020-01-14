@@ -1,0 +1,48 @@
+{#user_add.html#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>日志分析</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/mains.css">
+    <script type="text/javascript" src="../../static/common/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="../../static/admin/js/jquery.form.min.js"></script>
+    <script src="../../static/admin/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="../../static/admin/js/tinymce_setup.js"></script>
+    <script src="../../static/admin/js/user_add.js"></script>
+</head>
+
+<body class="inframe_body">
+<div class="breadcrub">用户管理 > 用户编辑 > 用户添加</div>
+
+<form class="release_form">
+    <h3>用户添加</h3>
+    <div class="form-group"><label>用户名称：</label>
+        <input type="text" class="input_txt2" name="user_name">
+    </div>
+    <div class="form-group"><label>用户密码：</label>
+        <input type="password" class="input_txt2" name="password">
+    </div>
+    <div class="form-group"><label>是否管理：</label>
+        <input type="text" placeholder="0代表否, 1代表是" class="input_txt2" name="is_admin">
+    </div>
+    <div class="form-group"><label>手机号码：</label>
+        <input type="text" class="input_txt2" name="phone">
+    </div>
+    <div class="form-group"><label>邮箱地址：</label>
+        <input type="text" class="input_txt2" name="email">
+    </div>
+
+    <div class="form-group indent-group line-top">
+        <input type="submit" value="添 加" class="confirm">
+        <input type="button" value="取 消" class="cancel" onclick="cancel()">
+    </div>
+
+    <div class="error_tip2">错误提示</div>
+</form>
+
+</body>
+</html>
